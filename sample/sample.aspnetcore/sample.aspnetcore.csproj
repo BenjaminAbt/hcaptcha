@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>BenjaminAbt.HCaptcha.Samples.AspNetCore</AssemblyName>
+    <RootNamespace>BenjaminAbt.HCaptcha.Samples.AspNetCore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\HCaptcha.AspNetCore\HCaptcha.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\HCaptcha\HCaptcha.csproj" />
+  </ItemGroup>
+
+</Project>

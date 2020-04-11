@@ -1,0 +1,89 @@
+@model BenjaminAbt.HCaptcha.Samples.AspNetCore.Controllers.IndexViewModel
+@using BenjaminAbt.HCaptcha
+@using Microsoft.Extensions.Options
+@inject IOptions<HCaptchaOptions> CaptchaOptionsAccesor
+
+@{
+    var captchaOptions = CaptchaOptionsAccesor.Value;
+}
+
+
+
+<div class="container">
+    <h1 class="mt-5">hCaptcha Demo</h1>
+    <form class="card p-2" action="" method="POST">
+        <script src="@(captchaOptions.JavaScriptUrl)" async defer></script>
+        <div class="form-group">
+            <div class="h-captcha" data-sitekey="@(captchaOptions.SiteKey)"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+@{
+    var response = Model?.Response;
+    if (response != null)
+    {
+
+        string alert = "";
+        string title = "";
+        string description = "";
+
+        if (response.Success)
+        {
+            alert = "alert-success";
+            title = "Well done - Captcha Succeeded!";
+            description = "Aww yeah, you successfully executed hCaptcha!";
+        }
+        else
+        {
+            alert = "alert-warning";
+            title = "Oooopsi - Captcha Failed!";
+            description = "Aww nooo, you got those errors:";
+        }
+
+        <div class="container">
+            <h1 class="mt-5">hCaptcha Verify Response: </h1>
+
+            <div class="alert @alert" role="alert">
+                <h4 class="alert-heading">@title</h4>
+                <p>@description</p>
+                @if (response.ErrorCodes != null && response.ErrorCodes.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var entry in response.ErrorCodes)
+                        {
+                            <li class="list-group-item">@entry</li>
+                        }
+                    </ul>
+                }
+                <hr>
+                <p>Details:</p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="details-Hostname">Hostname</span>
+                    </div>
+                    <input type="text" class="form-control" id="details-Hostname-value" aria-describedby="details-Hostname"
+                           value="@response.Hostname" readonly />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="details-Credit">Credit</span>
+                    </div>
+                    <input type="text" class="form-control" id="details-Credit-value" aria-describedby="details-Credit"
+                           value="@response.Credit" readonly />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="details-Timestamp">Timestamp</span>
+                    </div>
+                    <input type="text" class="form-control" id="details-Timestamp-value" aria-describedby="details-Timestamp"
+                           value="@response.Timestamp" readonly />
+                </div>
+                <hr>
+                <p class="mb-0">www.schwabencode.com</p>
+            </div>
+        </div>
+    }
+}

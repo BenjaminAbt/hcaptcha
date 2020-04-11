@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30001.183
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{8AC6FEAD-BEBF-4E62-B289-F424AF3AB61A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{56FF2A42-3FC8-49F4-AF7A-565B7D6068AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCaptcha", "src\HCaptcha\HCaptcha.csproj", "{CB639ECB-116E-4A6E-9E1F-84B89CEC203D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sample.aspnetcore", "sample\sample.aspnetcore\sample.aspnetcore.csproj", "{FA99832B-855D-4AB5-A492-BF84757AFDEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCaptcha.AspNetCore", "src\HCaptcha.AspNetCore\HCaptcha.AspNetCore.csproj", "{155F78F0-ABE6-4F9C-96DE-E23B4392D15D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{246E4F1E-C4B3-4180-906C-605E72C69097}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB639ECB-116E-4A6E-9E1F-84B89CEC203D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB639ECB-116E-4A6E-9E1F-84B89CEC203D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB639ECB-116E-4A6E-9E1F-84B89CEC203D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB639ECB-116E-4A6E-9E1F-84B89CEC203D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA99832B-855D-4AB5-A492-BF84757AFDEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA99832B-855D-4AB5-A492-BF84757AFDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA99832B-855D-4AB5-A492-BF84757AFDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA99832B-855D-4AB5-A492-BF84757AFDEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155F78F0-ABE6-4F9C-96DE-E23B4392D15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155F78F0-ABE6-4F9C-96DE-E23B4392D15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155F78F0-ABE6-4F9C-96DE-E23B4392D15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155F78F0-ABE6-4F9C-96DE-E23B4392D15D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CB639ECB-116E-4A6E-9E1F-84B89CEC203D} = {56FF2A42-3FC8-49F4-AF7A-565B7D6068AD}
+		{FA99832B-855D-4AB5-A492-BF84757AFDEE} = {8AC6FEAD-BEBF-4E62-B289-F424AF3AB61A}
+		{155F78F0-ABE6-4F9C-96DE-E23B4392D15D} = {56FF2A42-3FC8-49F4-AF7A-565B7D6068AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7370AF1B-0EF9-4138-AD34-F7D16F6A9D8A}
+	EndGlobalSection
+EndGlobal
