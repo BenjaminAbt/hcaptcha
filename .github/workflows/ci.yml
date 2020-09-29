@@ -17,15 +17,19 @@ jobs:
     build:
       runs-on: ubuntu-latest
       steps:
-      - uses: actions/checkout@v2
+
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
       
-      - uses: aarnott/nbgv@v0.3 # https://github.com/AArnott/nbgv
+      - name: Versioning
+        uses: dotnet/nbgv@master
         id: nbgv
 
-      - name: Versioning
-        run: echo ${{ steps.nbgv.outputs.SemVer2 }}
+      - name: Version Info
+        run: |
+          echo 'SemVer2: ${{ steps.nbgv.outputs.SemVer2 }}'
 
       - name: Build with dotnet
         run: dotnet build
