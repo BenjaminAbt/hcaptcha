@@ -35,10 +35,5 @@
         /// The hCaptcha base URL
         /// </summary>
         public string ApiBaseUrl { get; set; } = "https://hcaptcha.com/";
-
-        /// <summary>
-        /// Used by Refit in <see cref="IHCaptchaApi"/>
-        /// </summary>
-        public const string VerifyPath = "/siteverify";
     }
 }
