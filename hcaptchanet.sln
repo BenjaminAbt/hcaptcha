@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCaptcha.AspNetCore", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{246E4F1E-C4B3-4180-906C-605E72C69097}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
 		README.md = README.md
+		version.json = version.json
 	EndProjectSection
 EndProject
 Global
