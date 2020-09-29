@@ -25,6 +25,8 @@ namespace BenjaminAbt.HCaptcha.AspNetCore
                     }
                 );
 
+            services.AddScoped<IHCaptchaProvider, HCaptchaProvider>();
+
             return services;
         }
     }
