@@ -29,11 +29,11 @@
         /// <summary>
         ///  Full Url to hCaptchy JavaScript
         /// </summary>
-        public string JavaScriptUrl { get; set; } = "https://hcaptcha.com/1/api.js";
+        public const string JavaScriptUrl = "https://hcaptcha.com/1/api.js";
 
         /// <summary>
         /// The hCaptcha base URL
         /// </summary>
-        public string ApiBaseUrl { get; set; } = "https://hcaptcha.com/";
+        public const string ApiBaseUrl = "https://hcaptcha.com/";
     }
 }
