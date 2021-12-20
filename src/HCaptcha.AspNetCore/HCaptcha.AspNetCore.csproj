@@ -1,43 +1,44 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Product>HCaptcha for ASP.NET Core</Product>
-    <TargetFramework>net6.0</TargetFramework>
-    <AssemblyName>BenjaminAbt.HCaptcha.AspNetCore</AssemblyName>
-    <RootNamespace>BenjaminAbt.HCaptcha.AspNetCore</RootNamespace>
-    <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Product>HCaptcha for ASP.NET Core</Product>
+        <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>BenjaminAbt.HCaptcha.AspNetCore</AssemblyName>
+        <RootNamespace>BenjaminAbt.HCaptcha.AspNetCore</RootNamespace>
+        <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageId>HCaptcha.AspNetCore</PackageId>
-    <Version>0.0.1</Version>
-    <Authors>Benjamin Abt</Authors>
-    <Company>Benjamin Abt</Company>
-    <PackageTags>hCaptcha; Bot Check</PackageTags>
-    <Description>
-      This inofficial client library enables working with hCaptcha.com with ASP.NET Core.
-    </Description>
-    <owners>Benjamin Abt</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <projectUrl>https://github.com/BenjaminAbt/hcaptcha</projectUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <PackageId>HCaptcha.AspNetCore</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Benjamin Abt</Authors>
+        <Company>Benjamin Abt</Company>
+        <PackageTags>hCaptcha; Bot Check</PackageTags>
+        <Description>
+            This inofficial client library enables working with hCaptcha.com with ASP.NET Core.
+        </Description>
+        <owners>Benjamin Abt</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <projectUrl>https://github.com/BenjaminAbt/hcaptcha</projectUrl>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Refit.HttpClientFactory" Version="6.1.15" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Refit.HttpClientFactory" Version="6.1.15" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HCaptcha\HCaptcha.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\HCaptcha\HCaptcha.csproj" />
+    </ItemGroup>
 
 </Project>

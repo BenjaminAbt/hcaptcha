@@ -12,8 +12,14 @@ namespace BenjaminAbt.HCaptcha;
 /// <remarks>Inner exception is a of type <see cref="ApiException"/> which is a part of Refit.</remarks>
 public class HCaptchaApiException : Exception
 {
+    /// <summary>
+    /// Status Code
+    /// </summary>
     public HttpStatusCode StatusCode { get; } // Refit as Inner Exception
 
+    /// <summary>
+    /// Creates an instance of <see cref="HCaptchaApiException"/> with wrapped <see cref="ApiException"/>
+    /// </summary>
     public HCaptchaApiException(HttpStatusCode statusCode, ApiException apiException)
         : base("hCaptcha API request failed. See inner exception for details.", apiException)
     {
