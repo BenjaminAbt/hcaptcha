@@ -91,11 +91,11 @@ public class HomeController : Controller
 }
 ```
 
-It would also be possible to solve the whole automatism via a [ServiceFilter](https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-3.1#dependency-injection) instead of via the ModelBinder.
+It would also be possible to solve the whole automatism via a [ServiceFilter](https://docs.microsoft.com/aspnet/core/mvc/controllers/filters?view=aspnetcore-6.0&WT.mc_id=DT-MVP-5001507) instead of via the ModelBinder.
 
 ## Sample
 
-An ASP.NET Core 3.1 example can be found in the [sample directory](sample).
+An ASP.NET Core 6.0 example can be found in the [sample directory](sample).
 You only have to add the `SiteKey` and the `Secret` to [appsettings.json](sample/sample.aspnetcore/appsettings.json).
 
 ![Sample Preview](sample/preview.png)
@@ -107,7 +107,7 @@ If you don't want to use this project to request the hCaptcha.com API, you can d
 ## HttpClient
 
 > HttpClient is intended to be instantiated once per application! \
-> See [HttpClient documentation](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netframework-4.8).
+> See [HttpClient documentation](https://docs.microsoft.com/dotnet/api/system.net.http.httpclient?view=net-6.0&WT.mc_id=DT-MVP-5001507).
 
 ```csharp
 private static readonly HttpClient HttpClient = new HttpClient();

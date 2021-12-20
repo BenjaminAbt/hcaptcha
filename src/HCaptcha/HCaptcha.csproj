@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Product>HCaptcha ($(TargetFramework))</Product>
-    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <Product>HCaptcha for .NET</Product>
     <AssemblyName>BenjaminAbt.HCaptcha</AssemblyName>
     <RootNamespace>BenjaminAbt.HCaptcha</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
@@ -29,9 +29,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit" Version="5.1.67" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.3" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.3" />
+    <PackageReference Include="Refit" Version="6.1.15" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
