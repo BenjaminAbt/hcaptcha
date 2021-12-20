@@ -1,37 +1,38 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Product>HCaptcha for .NET</Product>
-    <AssemblyName>BenjaminAbt.HCaptcha</AssemblyName>
-    <RootNamespace>BenjaminAbt.HCaptcha</RootNamespace>
-    <TargetFramework>net6.0</TargetFramework>
-    <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Product>HCaptcha for .NET</Product>
+        <AssemblyName>BenjaminAbt.HCaptcha</AssemblyName>
+        <RootNamespace>BenjaminAbt.HCaptcha</RootNamespace>
+        <TargetFramework>net6.0</TargetFramework>
+        <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+    <PropertyGroup>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageId>HCaptcha</PackageId>
-    <Version>0.0.1</Version>
-    <Authors>Benjamin Abt</Authors>
-    <Company>Benjamin Abt</Company>
-    <PackageTags>hCaptcha; Bot Check</PackageTags>
-    <Description>
-      This inofficial client library enables working with hCaptcha.com.
-    </Description>
-    <owners>Benjamin Abt</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <projectUrl>https://github.com/BenjaminAbt/hcaptcha</projectUrl>
-  </PropertyGroup>
+    <PropertyGroup>
+        <PackageId>HCaptcha</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Benjamin Abt</Authors>
+        <Company>Benjamin Abt</Company>
+        <PackageTags>hCaptcha; Bot Check</PackageTags>
+        <Description>
+            This inofficial client library enables working with hCaptcha.com.
+        </Description>
+        <owners>Benjamin Abt</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <projectUrl>https://github.com/BenjaminAbt/hcaptcha</projectUrl>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Refit" Version="6.1.15" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Refit" Version="6.1.15" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    </ItemGroup>
 
 </Project>
