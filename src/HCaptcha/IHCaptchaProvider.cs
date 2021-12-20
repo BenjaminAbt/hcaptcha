@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BenjaminAbt.HCaptcha;
 
+/// <summary>
+/// Base implementation of hCaptcha Provider
+/// </summary>
 public interface IHCaptchaProvider
 {
     /// <summary>

@@ -15,6 +15,9 @@ public class HCaptchaProvider : IHCaptchaProvider
     private readonly IHCaptchaApi _captchaApi;
     private readonly HCaptchaOptions _captchaOptions;
 
+    /// <summary>
+    /// Creates an instance of <see cref="HCaptchaProvider"/>
+    /// </summary>
     public HCaptchaProvider(IHCaptchaApi captchaApi, IOptions<HCaptchaOptions> captchaOptionsAccessor)
     {
         _captchaApi = captchaApi;
