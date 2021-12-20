@@ -11,7 +11,7 @@ License|[![GitHub](https://img.shields.io/github/license/benjaminabt/hcaptcha)](
 ## Dependencies
 
 ### Refit
-The [HCaptcha.AspNetCore](src/HCaptcha.AspNetCore) project contains the interface [IHCaptchaApi](HCaptcha.AspNetCore/IHCaptchaApi.cs) for use with [Refit](https://github.com/reactiveui/refit).
+The [HCaptcha.AspNetCore](src/HCaptcha.AspNetCore) project contains the interface [IHCaptchaApi](src/HCaptcha/IHCaptchaApi.cs) for use with [Refit](https://github.com/reactiveui/refit).
 Refit is an open source project for type-safe handling of REST endpoints, as provided by hCaptcha.com.
 
 If you can't or don't want to use Refit, you can create your own implementation of `IHCaptchaApi` or see usage of hCaptcha without this project.
