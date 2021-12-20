@@ -3,26 +3,37 @@ name: NETCore
 on:
     push:
       branches:
-        - master
+        - main
     pull_request:
       types: [closed]
       branches:
-        - master
+        - main
 
 env:
-  # https://www.nuget.org/packages/GitVersion.Tool
   BuildConfig: Release
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_VERSION: '6.0.101'  # https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/6.0/releases.json
 
 jobs:
     build:
       runs-on: ubuntu-latest
       steps:
 
+      - name: Cancel previous builds in PR
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
       
+      - name: 'Install .NET SDK'
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
       - name: Versioning
         uses: dotnet/nbgv@master
         id: nbgv
@@ -30,17 +41,16 @@ jobs:
       - name: Version Info
         run: |
           echo 'SemVer2: ${{ steps.nbgv.outputs.SemVer2 }}'
-
       - name: Build with dotnet
         run: dotnet build
               --configuration ${{ env.BuildConfig }}
               /p:Version=${{ steps.nbgv.outputs.AssemblyVersion }}
 
       - name: Test with dotnet
-        run: dotnet test 
+        run: dotnet test
 
       - name: Pack NuGet
-        run: dotnet pack 
+        run: dotnet pack
               --configuration ${{ env.BuildConfig }}
               /p:Version=${{ steps.nbgv.outputs.NuGetPackageVersion }}
 

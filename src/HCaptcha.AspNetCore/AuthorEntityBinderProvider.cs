@@ -1,21 +1,22 @@
-﻿using System;
+// Copyright © Benjamin Abt 2020-2021, all rights reserved
+
+using System;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-namespace BenjaminAbt.HCaptcha.AspNetCore
+namespace BenjaminAbt.HCaptcha.AspNetCore;
+
+public class AuthorEntityBinderProvider : IModelBinderProvider
 {
-    public class AuthorEntityBinderProvider : IModelBinderProvider
+    public IModelBinder? GetBinder(ModelBinderProviderContext context)
     {
-        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        ArgumentNullException.ThrowIfNull(context);
+
+        if (context.Metadata.ModelType == typeof(HCaptchaVerifyResponse))
         {
-            if (context is null) throw new ArgumentNullException(nameof(context));
-
-            if (context.Metadata.ModelType == typeof(HCaptchaVerifyResponse))
-            {
-                return new BinderTypeModelBinder(typeof(HCaptchaModelBinder));
-            }
-
-            return null;
+            return new BinderTypeModelBinder(typeof(HCaptchaModelBinder));
         }
+
+        return null;
     }
 }

@@ -1,0 +1,25 @@
+<Project>
+
+    <PropertyGroup>
+        <MinClientVersion>2.12</MinClientVersion>
+        <Authors>Benjamin Abt</Authors>
+        <PackageProjectUrl>https://github.com/BenjaminAbt/hcaptcha</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <DefaultLanguage>en-US</DefaultLanguage>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
+        <LangVersion>preview</LangVersion>
+        <Nullable>enable</Nullable>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <DebugType>embedded</DebugType>
+        <IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
+        <IsBenchmarkProject>$(MsBuildProjectName.Contains('Benchmark'))</IsBenchmarkProject>
+        <IsPackable>false</IsPackable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(IsTestProject)' != 'true' AND '$(IsBenchmarkProject)' != 'true'">
+        <GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+</Project>

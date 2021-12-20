@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Product>HCaptcha.AspNetCore ($(TargetFramework))</Product>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Product>HCaptcha for ASP.NET Core</Product>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>BenjaminAbt.HCaptcha.AspNetCore</AssemblyName>
     <RootNamespace>BenjaminAbt.HCaptcha.AspNetCore</RootNamespace>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit.HttpClientFactory" Version="5.1.67" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.1.15" />
   </ItemGroup>
 
   <ItemGroup>
