@@ -15,7 +15,6 @@
         <IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
         <IsBenchmarkProject>$(MsBuildProjectName.Contains('Benchmark'))</IsBenchmarkProject>
         <IsPackable>false</IsPackable>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(IsTestProject)' != 'true' AND '$(IsBenchmarkProject)' != 'true'">
