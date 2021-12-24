@@ -30,7 +30,7 @@ public class HCaptchaVerifyResponse
     /// </summary>
     /// <remarks>https://docs.hcaptcha.com/#server</remarks>
     [JsonPropertyName("hostname")]
-    public string Hostname { get; set; } = null!;
+    public string? Hostname { get; set; }
 
     /// <summary>
     /// optional: whether the response will be credited
