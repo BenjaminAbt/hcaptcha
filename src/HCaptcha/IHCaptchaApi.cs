@@ -1,7 +1,5 @@
-// Copyright © Benjamin Abt 2020-2021, all rights reserved
+// Copyright © Benjamin Abt 2020-2024, all rights reserved
 
-using System.Threading;
-using System.Threading.Tasks;
 using Refit;
 
 namespace BenjaminAbt.HCaptcha;

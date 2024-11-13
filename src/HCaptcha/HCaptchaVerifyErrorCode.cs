@@ -1,4 +1,4 @@
-// Copyright © Benjamin Abt 2020-2021, all rights reserved
+// Copyright © Benjamin Abt 2020-2024, all rights reserved
 
 namespace BenjaminAbt.HCaptcha;
 

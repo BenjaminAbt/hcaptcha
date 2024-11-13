@@ -1,6 +1,5 @@
-// Copyright © Benjamin Abt 2020-2021, all rights reserved
+// Copyright © Benjamin Abt 2020-2024, all rights reserved
 
-using System;
 using System.Text.Json.Serialization;
 
 namespace BenjaminAbt.HCaptcha;

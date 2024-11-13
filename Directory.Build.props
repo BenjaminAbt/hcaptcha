@@ -19,10 +19,6 @@
         <IsBenchmarkProject>$(MsBuildProjectName.Contains('Benchmark'))</IsBenchmarkProject>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(IsTestProject)' != 'true' AND '$(IsBenchmarkProject)' != 'true'">
-        <GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
-    </PropertyGroup>
-
     <PropertyGroup Label="Project Defaults">
         <TargetFrameworks>net8.0</TargetFrameworks>
     </PropertyGroup>
