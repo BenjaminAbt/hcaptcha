@@ -1,4 +1,4 @@
-// Copyright © Benjamin Abt 2020-2021, all rights reserved
+// Copyright © Benjamin Abt 2020-2024, all rights reserved
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +13,7 @@ public class HomeController : Controller
     public IActionResult Index(HCaptchaVerifyResponse hCaptcha) => View(new IndexViewModel(hCaptcha));
 }
 
-public class IndexViewModel
+public class IndexViewModel(HCaptchaVerifyResponse? response = null)
 {
-    public HCaptchaVerifyResponse? Response { get; }
-
-    public IndexViewModel(HCaptchaVerifyResponse? response = null) => Response = response;
+    public HCaptchaVerifyResponse? Response { get; } = response;
 }

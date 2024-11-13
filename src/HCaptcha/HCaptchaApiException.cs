@@ -1,28 +1,23 @@
-// Copyright © Benjamin Abt 2020-2021, all rights reserved
+// Copyright © Benjamin Abt 2020-2024, all rights reserved
 
-using System;
 using System.Net;
 using Refit;
 
 namespace BenjaminAbt.HCaptcha;
 
 /// <summary>
-/// hCapcha API Exception
+/// Represents an exception that occurs when an hCaptcha API request fails.
 /// </summary>
-/// <remarks>Inner exception is a of type <see cref="ApiException"/> which is a part of Refit.</remarks>
-public class HCaptchaApiException : Exception
+/// <remarks>
+/// Initializes a new instance of the <see cref="HCaptchaApiException"/> class.
+/// </remarks>
+/// <param name="statusCode">The HTTP status code returned by the hCaptcha API.</param>
+/// <param name="apiException">The inner exception that contains details about the API error.</param>
+public class HCaptchaApiException(HttpStatusCode statusCode, ApiException apiException)
+    : Exception("hCaptcha API request failed. See inner exception for details.", apiException)
 {
     /// <summary>
-    /// Status Code
+    /// Gets the HTTP status code associated with the failed hCaptcha API request.
     /// </summary>
-    public HttpStatusCode StatusCode { get; } // Refit as Inner Exception
-
-    /// <summary>
-    /// Creates an instance of <see cref="HCaptchaApiException"/> with wrapped <see cref="ApiException"/>
-    /// </summary>
-    public HCaptchaApiException(HttpStatusCode statusCode, ApiException apiException)
-        : base("hCaptcha API request failed. See inner exception for details.", apiException)
-    {
-        StatusCode = statusCode;
-    }
+    public HttpStatusCode StatusCode { get; } = statusCode;
 }

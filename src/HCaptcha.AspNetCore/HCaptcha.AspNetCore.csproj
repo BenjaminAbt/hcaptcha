@@ -2,17 +2,11 @@
 
     <PropertyGroup>
         <Product>HCaptcha for ASP.NET Core</Product>
-        <TargetFramework>net6.0</TargetFramework>
         <AssemblyName>BenjaminAbt.HCaptcha.AspNetCore</AssemblyName>
         <RootNamespace>BenjaminAbt.HCaptcha.AspNetCore</RootNamespace>
-        <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
         <DebugType>embedded</DebugType>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <IsPackable>true</IsPackable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -34,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Refit.HttpClientFactory" Version="6.1.15" />
+        <PackageReference Include="Refit.HttpClientFactory" />
     </ItemGroup>
 
     <ItemGroup>

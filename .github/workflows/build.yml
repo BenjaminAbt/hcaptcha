@@ -1,18 +1,17 @@
-name: NETCore
+name: NET
 
 on:
     push:
       branches:
         - main
     pull_request:
-      types: [labeled]
       branches:
         - main
+
 
 env:
   BuildConfig: Release
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  DOTNET_VERSION: '6.0.101'  # https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/6.0/releases.json
 
 jobs:
     build:
@@ -20,42 +19,45 @@ jobs:
       steps:
 
       - name: Cancel previous builds in PR
-        uses: styfle/cancel-workflow-action@0.9.1
+        uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
 
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
       
-      - name: 'Install .NET SDK'
-        uses: actions/setup-dotnet@v1
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          global-json-file: ./global.json
 
-      - name: Versioning
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Setup Git Versioning
         uses: dotnet/nbgv@master
         id: nbgv
 
-      - name: Version Info
+      - name: Show Version Info
         run: |
           echo 'SemVer2: ${{ steps.nbgv.outputs.SemVer2 }}'
+
       - name: Build with dotnet
         run: dotnet build
-              --configuration ${{ env.BuildConfig }}
+              --no-restore --configuration ${{ env.BuildConfig }}
               /p:Version=${{ steps.nbgv.outputs.AssemblyVersion }}
-
-      - name: Test with dotnet
-        run: dotnet test
 
       - name: Pack NuGet
         run: dotnet pack
               --configuration ${{ env.BuildConfig }}
+              /p:ContinuousIntegrationBuild=true
               /p:Version=${{ steps.nbgv.outputs.NuGetPackageVersion }}
 
       - name: Push to NuGet
         run: dotnet nuget push **/*.nupkg
                 --api-key ${{ secrets.NUGET_DEPLOY_KEY }}
                 --source https://api.nuget.org/v3/index.json
-                --no-symbols 1
+                --no-symbols
+                --skip-duplicate

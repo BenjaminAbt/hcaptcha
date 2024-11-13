@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+    
+    <ItemGroup Label=".NET Dependencies">
+        <PackageVersion Include="Refit" Version="7.2.22" />
+        <PackageVersion Include="Refit.HttpClientFactory" Version="7.2.22" />
+        <PackageVersion Include="Microsoft.Extensions.Options" Version="8.0.0" />
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    </ItemGroup>
+</Project>
