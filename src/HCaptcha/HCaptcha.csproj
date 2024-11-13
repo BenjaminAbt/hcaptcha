@@ -4,14 +4,7 @@
         <Product>HCaptcha for .NET</Product>
         <AssemblyName>BenjaminAbt.HCaptcha</AssemblyName>
         <RootNamespace>BenjaminAbt.HCaptcha</RootNamespace>
-        <TargetFramework>net6.0</TargetFramework>
-        <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
         <DebugType>embedded</DebugType>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <IsPackable>true</IsPackable>
     </PropertyGroup>
 
@@ -30,9 +23,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Refit" Version="6.1.15" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+        <PackageReference Include="Refit" />
+        <PackageReference Include="Microsoft.Extensions.Options" />
+        <PackageReference Include="Microsoft.Extensions.Http" />
     </ItemGroup>
 
 </Project>
