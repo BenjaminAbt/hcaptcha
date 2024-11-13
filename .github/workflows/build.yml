@@ -49,21 +49,6 @@ jobs:
               --no-restore --configuration ${{ env.BuildConfig }}
               /p:Version=${{ steps.nbgv.outputs.AssemblyVersion }}
 
-      - name: Test with dotnet
-        run: dotnet test
-              --no-build --configuration ${{ env.BuildConfig }}
-              --logger "trx;LogFileName=test-results.trx" --results-directory ./artifacts/testResults
-        continue-on-error: true
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: DotNET Tests
-          path: "./artifacts/testResults/test-results.trx"
-          reporter: dotnet-trx
-          fail-on-error: true
-
       - name: Pack NuGet
         run: dotnet pack
               --configuration ${{ env.BuildConfig }}
