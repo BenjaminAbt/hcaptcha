@@ -6,7 +6,7 @@ This project is **not** official by hCaptcha.com.
 |-|-|-|
 |NuGet|[![NuGet](https://img.shields.io/nuget/v/HCaptcha?label=HCaptcha)](https://www.nuget.org/packages/HCaptcha/)|[![NuGet](https://img.shields.io/nuget/v/HCaptcha.AspNetCore?label=HCaptcha.AspNetCore)](https://www.nuget.org/packages/HCaptcha.AspNetCore/)|
 License|[![GitHub](https://img.shields.io/github/license/benjaminabt/hcaptcha)](LICENSE)|[![GitHub](https://img.shields.io/github/license/benjaminabt/hcaptcha)](LICENSE)|
-|GitHub Build|![NETCore](https://github.com/BenjaminAbt/hcaptcha/workflows/NETCore/badge.svg)|
+|GitHub Build|![NETCore](https://github.com/BenjaminAbt/hcaptcha/workflows/NET/badge.svg)|
 
 ## Dependencies
 
@@ -163,7 +163,7 @@ public class YourServiceClass
 
     public async Task<HttpResponseMessage> Verify(string secret, string token, string remoteIp)
     {
-        // HttpClient client = _clientFactory.CreateClient(); 
+        // HttpClient client = _clientFactory.CreateClient();
         //    if you dont have a named service registration
         HttpClient client = _clientFactory.CreateClient("hCaptcha");
 
