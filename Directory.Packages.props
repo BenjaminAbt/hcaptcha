@@ -1,12 +1,13 @@
 <Project>
-    <PropertyGroup>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    </PropertyGroup>
-    
-    <ItemGroup Label=".NET Dependencies">
-        <PackageVersion Include="Refit" Version="7.2.22" />
-        <PackageVersion Include="Refit.HttpClientFactory" Version="7.2.22" />
-        <PackageVersion Include="Microsoft.Extensions.Options" Version="8.0.0" />
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="8.0.2" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.23" Condition="'$(TargetFramework)' == 'net9.0'" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.15" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="11.0.0" Condition="'$(TargetFramework)' == 'net11.0'" />
+    <PackageVersion Include="xunit.v3" Version="4.0.3" />
+    <PackageVersion Include="coverlet.MTP" Version="10.1.0" />
+  </ItemGroup>
 </Project>

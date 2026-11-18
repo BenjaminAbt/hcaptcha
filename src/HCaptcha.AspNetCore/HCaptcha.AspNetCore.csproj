@@ -1,38 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <Product>HCaptcha for ASP.NET Core</Product>
-        <AssemblyName>BenjaminAbt.HCaptcha.AspNetCore</AssemblyName>
-        <RootNamespace>BenjaminAbt.HCaptcha.AspNetCore</RootNamespace>
-        <DebugType>embedded</DebugType>
-        <IsPackable>true</IsPackable>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <PackageId>HCaptcha.AspNetCore</PackageId>
-        <Version>0.0.1</Version>
-        <Authors>Benjamin Abt</Authors>
-        <Company>Benjamin Abt</Company>
-        <PackageTags>hCaptcha; Bot Check</PackageTags>
-        <Description>
-            This inofficial client library enables working with hCaptcha.com with ASP.NET Core.
-        </Description>
-        <owners>Benjamin Abt</owners>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <projectUrl>https://github.com/BenjaminAbt/hcaptcha</projectUrl>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Refit.HttpClientFactory" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\HCaptcha\HCaptcha.csproj" />
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFrameworks>$(LibraryFrameworks)</TargetFrameworks>
+    <AssemblyName>BenjaminAbt.HCaptcha.AspNetCore</AssemblyName>
+    <RootNamespace>BenjaminAbt.HCaptcha.AspNetCore</RootNamespace>
+    <PackageId>HCaptcha.AspNetCore</PackageId>
+    <Description>ASP.NET Core model binding for hCaptcha verification.</Description>
+    <PackageTags>hCaptcha;captcha</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="../HCaptcha/HCaptcha.csproj" />
+  </ItemGroup>
 </Project>

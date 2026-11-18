@@ -1,19 +1,20 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright Â© BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 namespace BenjaminAbt.HCaptcha;
 
 /// <summary>
-/// Base implementation of hCaptcha Provider
+/// Verifies hCaptcha challenge tokens.
 /// </summary>
 public interface IHCaptchaProvider
 {
     /// <summary>
-    /// Requests the hCaptcha API. Timeout configuration is provided via <paramref name="cancellationToken"/>
+    /// Submits a token for server-side verification.
     /// </summary>
     /// <param name="token">The client's token.</param>
     /// <param name="remoteIp">Optional the client's IP address</param>
     /// <param name="cancellationToken"></param>
     /// <returns><see cref="HCaptchaVerifyResponse"/></returns>
     /// <exception cref="HCaptchaApiException">if request failed.</exception>
-    Task<HCaptchaVerifyResponse?> Verify(string token, string? remoteIp = null, CancellationToken cancellationToken = default);
+    Task<HCaptchaVerifyResponse> VerifyAsync(string token, string? remoteIp = null,
+        CancellationToken cancellationToken = default);
 }

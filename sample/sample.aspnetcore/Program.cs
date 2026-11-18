@@ -1,32 +1,19 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright © BEN ABT (https://benjamin-abt.com) - all rights reserved
+
+using BenjaminAbt.HCaptcha.AspNetCore;
 
 namespace BenjaminAbt.HCaptcha.Samples.AspNetCore;
 
-/// <summary>
-/// The entry point for the application, responsible for setting up and running the web host.
-/// </summary>
-public class Program
+internal static class Program
 {
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
-    /// <param name="args">The command-line arguments passed to the application.</param>
     public static void Main(string[] args)
     {
-        // Build and run the host
-        CreateHostBuilder(args).Build().Run();
-    }
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddHCaptcha(builder.Configuration.GetRequiredSection("HCaptcha"));
+        builder.Services.AddControllersWithViews(options => options.AddHCaptchaModelBinder());
 
-    /// <summary>
-    /// Creates and configures the <see cref="IHostBuilder"/> for the application.
-    /// </summary>
-    /// <param name="args">The command-line arguments passed to the application.</param>
-    /// <returns>An <see cref="IHostBuilder"/> that configures the web host.</returns>
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                // Use the Startup class for configuring services and middleware
-                webBuilder.UseStartup<Startup>();
-            });
+        WebApplication app = builder.Build();
+        app.MapControllers();
+        app.Run();
+    }
 }

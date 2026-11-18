@@ -1,44 +1,34 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright Â© BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Refit;
+using Microsoft.Extensions.Options;
 
 namespace BenjaminAbt.HCaptcha.AspNetCore;
 
-/// <summary>
-/// Provides extension methods for registering hCaptcha services in the dependency injection container.
-/// </summary>
+/// <summary>Registers hCaptcha verification services.</summary>
 public static class HCaptchaExtensions
 {
-    /// <summary>
-    /// Adds hCaptcha services to the <see cref="IServiceCollection"/> using the provided configuration section.
-    /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which the hCaptcha services will be added.</param>
-    /// <param name="section">The <see cref="IConfigurationSection"/> containing the hCaptcha configuration settings.</param>
-    /// <returns>The <see cref="IServiceCollection"/> with hCaptcha services added.</returns>
-    /// <exception cref="ArgumentNullException">
-    /// Thrown when <paramref name="services"/> or <paramref name="section"/> is <c>null</c>.
-    /// </exception>
+    /// <summary>Registers the verification client and validates configuration at startup.</summary>
     public static IServiceCollection AddHCaptcha(this IServiceCollection services, IConfigurationSection section)
     {
-        // Bind configuration to HCaptchaOptions
-        HCaptchaOptions captchaOptions = new();
-        section.Bind(captchaOptions);
+        services.AddOptions<HCaptchaOptions>().Bind(section)
+            .Validate(o => !string.IsNullOrWhiteSpace(o.SiteKey), "HCaptcha SiteKey is required.")
+            .Validate(o => !string.IsNullOrWhiteSpace(o.Secret), "HCaptcha Secret is required.")
+            .Validate(o => Uri.TryCreate(o.ApiBaseUrl, UriKind.Absolute, out Uri? uri)
+                && uri.Scheme == Uri.UriSchemeHttps,
+                "HCaptcha ApiBaseUrl must be an absolute HTTPS URL.")
+            .ValidateOnStart();
 
-        // Configure options to be injected wherever needed
-        services.Configure<HCaptchaOptions>(section);
-
-        // Register the Refit client for IHCaptchaApi with the base URL from configuration
-        services.AddRefitClient<IHCaptchaApi>()
-            .ConfigureHttpClient(c =>
-            {
-                c.BaseAddress = new Uri(captchaOptions.ApiBaseUrl);
-            });
-
-        // Register the hCaptcha provider
-        services.AddScoped<IHCaptchaProvider, HCaptchaProvider>();
-
+        services.AddHttpClient<IHCaptchaProvider, HCaptchaProvider>((sp, client) =>
+        {
+            client.BaseAddress = new Uri(sp.GetRequiredService<IOptions<HCaptchaOptions>>().Value.ApiBaseUrl);
+            client.Timeout = TimeSpan.FromSeconds(10);
+        }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+        {
+            AllowAutoRedirect = false,
+            UseCookies = false
+        });
         return services;
     }
 }

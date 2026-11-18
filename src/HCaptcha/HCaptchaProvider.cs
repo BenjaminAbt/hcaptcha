@@ -1,46 +1,47 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright © BEN ABT (https://benjamin-abt.com) - all rights reserved
 
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
-using Refit;
 
 namespace BenjaminAbt.HCaptcha;
 
-/// <summary>
-/// HCaptcha Provider - API communication
-/// </summary>
-public class HCaptchaProvider : IHCaptchaProvider
+/// <summary>Submits tokens to the hCaptcha verification endpoint.</summary>
+public sealed class HCaptchaProvider(HttpClient client, IOptions<HCaptchaOptions> options) : IHCaptchaProvider
 {
-    private readonly IHCaptchaApi _captchaApi;
-    private readonly HCaptchaOptions _captchaOptions;
-
-    /// <summary>
-    /// Creates an instance of <see cref="HCaptchaProvider"/>
-    /// </summary>
-    public HCaptchaProvider(IHCaptchaApi captchaApi, IOptions<HCaptchaOptions> captchaOptionsAccessor)
-    {
-        _captchaApi = captchaApi;
-        _captchaOptions = captchaOptionsAccessor.Value;
-    }
-
-    /// <summary>
-    /// Requests the hCaptcha API via the provided <see cref="IHCaptchaApi"/>. Timeout configuration is provided via <paramref name="cancellationToken"/>
-    /// </summary>
-    /// <param name="token">The client's token.</param>
-    /// <param name="remoteIp">Optional the client's IP address</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns><see cref="HCaptchaVerifyResponse"/></returns>
-    /// <exception cref="HCaptchaApiException">if request failed.</exception>
-    public async Task<HCaptchaVerifyResponse?> Verify(string token, string? remoteIp = null,
+    /// <inheritdoc />
+    public async Task<HCaptchaVerifyResponse> VerifyAsync(string token, string? remoteIp = null,
         CancellationToken cancellationToken = default)
     {
+        HCaptchaOptions settings = options.Value;
+        Dictionary<string, string> fields = new()
+        {
+            ["secret"] = settings.Secret,
+            ["response"] = token,
+            ["sitekey"] = settings.SiteKey
+        };
+        if (settings.VerifyRemoteIp && !string.IsNullOrWhiteSpace(remoteIp))
+        {
+            fields.Add("remoteip", remoteIp);
+        }
+
+        using FormUrlEncodedContent body = new(fields);
+        using HttpResponseMessage result = await client.PostAsync("/siteverify", body, cancellationToken)
+            .ConfigureAwait(false);
         try
         {
-            return await _captchaApi.Verify(_captchaOptions.Secret, token,
-                _captchaOptions.VerifyRemoteIp ? remoteIp : null, cancellationToken).ConfigureAwait(false);
+            result.EnsureSuccessStatusCode();
+            return await result.Content.ReadFromJsonAsync(
+                HCaptchaJsonContext.Default.HCaptchaVerifyResponse, cancellationToken)
+                .ConfigureAwait(false) ?? throw new JsonException("Expected a verification response.");
         }
-        catch (ApiException e)
+        catch (Exception ex) when (ex is HttpRequestException or JsonException)
         {
-            throw new HCaptchaApiException(e.StatusCode, e);
+            throw new HCaptchaApiException(result.StatusCode, ex);
         }
     }
 }
+
+[JsonSerializable(typeof(HCaptchaVerifyResponse))]
+internal partial class HCaptchaJsonContext : JsonSerializerContext;

@@ -1,7 +1,6 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright © BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 using System.Net;
-using Refit;
 
 namespace BenjaminAbt.HCaptcha;
 
@@ -13,7 +12,7 @@ namespace BenjaminAbt.HCaptcha;
 /// </remarks>
 /// <param name="statusCode">The HTTP status code returned by the hCaptcha API.</param>
 /// <param name="apiException">The inner exception that contains details about the API error.</param>
-public class HCaptchaApiException(HttpStatusCode statusCode, ApiException apiException)
+public class HCaptchaApiException(HttpStatusCode statusCode, Exception apiException)
     : Exception("hCaptcha API request failed. See inner exception for details.", apiException)
 {
     /// <summary>
