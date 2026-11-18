@@ -1,4 +1,4 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright Â© BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 using System.Text.Json.Serialization;
 
@@ -30,13 +30,6 @@ public class HCaptchaVerifyResponse
     /// <remarks>https://docs.hcaptcha.com/#server</remarks>
     [JsonPropertyName("hostname")]
     public string? Hostname { get; set; }
-
-    /// <summary>
-    /// optional: whether the response will be credited
-    /// </summary>
-    /// <remarks>https://docs.hcaptcha.com/#server</remarks>
-    [JsonPropertyName("credit")]
-    public bool Credit { get; set; }
 
     /// <summary>
     /// string based error code array

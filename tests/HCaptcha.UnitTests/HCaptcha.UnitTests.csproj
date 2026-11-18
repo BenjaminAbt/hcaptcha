@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(LibraryFrameworks)</TargetFrameworks>
+    <RootNamespace>BenjaminAbt.HCaptcha.UnitTests</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="coverlet.MTP" PrivateAssets="all" />
+    <ProjectReference Include="../../src/HCaptcha.AspNetCore/HCaptcha.AspNetCore.csproj" />
+  </ItemGroup>
+</Project>

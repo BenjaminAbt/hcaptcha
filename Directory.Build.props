@@ -1,46 +1,20 @@
 <Project>
-
-    <PropertyGroup>
-        <MinClientVersion>2.12</MinClientVersion>
-        <Authors>Benjamin Abt</Authors>
-        <PackageProjectUrl>https://github.com/BenjaminAbt/hcaptcha</PackageProjectUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <DefaultLanguage>en-US</DefaultLanguage>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <DebugType>embedded</DebugType>
-        <IsPackable>false</IsPackable>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Env">
-        <IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
-        <IsBenchmarkProject>$(MsBuildProjectName.Contains('Benchmark'))</IsBenchmarkProject>
-    </PropertyGroup>
-
-    <PropertyGroup Label="Project Defaults">
-        <TargetFrameworks>net8.0</TargetFrameworks>
-    </PropertyGroup>
-    
-    <PropertyGroup Label="C#">
-        <LangVersion>preview</LangVersion>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)BenjaminAbt.HCaptchaNET.snk</AssemblyOriginatorKeyFile>
-
-        <PublicKey>
-            0024000004800000940000000602000000240000525341310004000001000100a9ba6ecd5a2e4a
-            a9095322a9baebe05966db4f05bf23df1457fc7b084079d7b320a3b0bcf5bb278d9e66f8f70d7e
-            3d813aeb6a96baf75ef83033a5e0e5558df774d575599cdafbe6e047522db722b6244860a0d5b3
-            b3bfbe24c50d698411c5d19e3d3765c9599809e2808ed0d6b2f9129395a95468484eac0815b070
-            ea5b95dc
-        </PublicKey>
-    </PropertyGroup>
-
+  <PropertyGroup>
+    <LibraryFrameworks>net8.0;net9.0;net10.0;net11.0</LibraryFrameworks>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <IsPackable>false</IsPackable>
+    <Authors>Benjamin Abt</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/BenjaminAbt/hcaptcha</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)BenjaminAbt.HCaptchaNET.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
 </Project>

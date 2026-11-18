@@ -1,0 +1,18 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate:
+    name: Build and Test (all frameworks)
+    uses: ./.github/workflows/build-and-test.yml
+    with:
+      upload-packages: false
+      upload-test-results: true

@@ -1,4 +1,4 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright © BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 namespace BenjaminAbt.HCaptcha;
 
@@ -31,10 +31,10 @@ public class HCaptchaOptions
     /// <summary>
     ///  Full Url to hCaptchy JavaScript
     /// </summary>
-    public string JavaScriptUrl { get; set; } = "https://hcaptcha.com/1/api.js";
+    public string JavaScriptUrl { get; set; } = "https://js.hcaptcha.com/1/api.js";
 
     /// <summary>
     /// The hCaptcha base URL
     /// </summary>
-    public string ApiBaseUrl { get; set; } = "https://hcaptcha.com/";
+    public string ApiBaseUrl { get; set; } = "https://api.hcaptcha.com/";
 }

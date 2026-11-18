@@ -1,0 +1,40 @@
+name: Publish release
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - name: Download and verify release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          gh release download "$TAG" --pattern '*.nupkg' --pattern '*.snupkg' --dir artifacts
+          for id in HCaptcha HCaptcha.AspNetCore; do
+            test -s "artifacts/$id.${TAG#v}.nupkg"
+            test -s "artifacts/$id.${TAG#v}.snupkg"
+          done
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 11.0.x
+      - uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      - name: Push packages and matching symbols
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          for id in HCaptcha HCaptcha.AspNetCore; do
+            dotnet nuget push "artifacts/$id.${TAG#v}.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+          done

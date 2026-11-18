@@ -1,0 +1,35 @@
+name: Main build
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build:
+    uses: ./.github/workflows/build-and-test.yml
+    with:
+      upload-packages: true
+      upload-test-results: false
+
+  draft:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TAG: v${{ needs.build.outputs.version }}
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          name: nuget-packages
+          path: artifacts
+      - name: Attach tested packages to a versioned draft
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            [[ "$(gh release view "$TAG" --json isDraft --jq .isDraft)" == true ]] || exit 0
+            gh release upload "$TAG" artifacts/* --clobber
+          else
+            gh release create "$TAG" artifacts/* --draft --target "$GITHUB_SHA" --title "$TAG" --generate-notes
+          fi

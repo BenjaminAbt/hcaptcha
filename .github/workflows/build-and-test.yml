@@ -1,0 +1,89 @@
+name: Build and Test (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      configuration:
+        description: 'Build configuration'
+        required: false
+        type: string
+        default: 'Release'
+      upload-test-results:
+        description: 'Whether to upload test results as artifacts'
+        required: true
+        type: boolean
+      upload-packages:
+        description: 'Whether to upload NuGet packages'
+        required: true
+        type: boolean
+    outputs:
+      version:
+        description: 'The calculated version from NBGV'
+        value: ${{ jobs.build.outputs.version }}
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.nbgv.outputs.SemVer2 }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+          global-json-file: global.json
+
+      - name: Calculate Version with NBGV
+        uses: dotnet/nbgv@master
+        id: nbgv
+        with:
+          setAllVars: true
+
+      - name: Version Info
+        run: |
+          echo "Calculated version: ${{ steps.nbgv.outputs.SemVer2 }}"
+
+      - name: Build
+        run: dotnet build --configuration ${{ inputs.configuration }} --verbosity minimal /p:Version=${{ steps.nbgv.outputs.SemVer2 }}
+
+      - name: Check code style
+        run: dotnet format --verify-no-changes --no-restore --severity info
+
+      - name: Test and enforce 90% line coverage per library and framework
+        run: >-
+          dotnet test --configuration ${{ inputs.configuration }} --no-build --report-xunit-trx
+          --coverlet --coverlet-include '[BenjaminAbt.HCaptcha*]*' --coverlet-output-format cobertura
+          --coverlet-threshold 90 --coverlet-threshold-type line --coverlet-threshold-stat Minimum
+
+      - name: Upload test results
+        if: always() && inputs.upload-test-results
+        uses: actions/upload-artifact@v6
+        with:
+          name: test-results
+          path: |
+            **/TestResults/**/*.trx
+            **/TestResults/**/coverage.cobertura.*.xml
+
+      - name: Pack NuGet packages
+        run: dotnet pack --configuration ${{ inputs.configuration }} --no-build --include-symbols -p:SymbolPackageFormat=snupkg --output ./artifacts /p:PackageVersion=${{ steps.nbgv.outputs.SemVer2 }}
+
+      - name: Upload NuGet packages
+        if: inputs.upload-packages
+        uses: actions/upload-artifact@v6
+        with:
+          name: nuget-packages
+          path: |
+            ./artifacts/*.nupkg
+            ./artifacts/*.snupkg
+          retention-days: 30
+

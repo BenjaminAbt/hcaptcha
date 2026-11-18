@@ -1,4 +1,4 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright Â© BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 namespace BenjaminAbt.HCaptcha;
 
@@ -32,10 +32,22 @@ public enum HCaptchaVerifyErrorCode
     /// invalid-input-response
     /// </summary>
     /// <remarks>https://docs.hcaptcha.com/#server</remarks>
-    InvalidInputRespose,
+    InvalidInputResponse,
     /// <summary>
     /// bad request
     /// </summary>
     /// <remarks>https://docs.hcaptcha.com/#server</remarks>
-    BadRequest
+    BadRequest,
+    /// <summary>The submitted token expired.</summary>
+    ExpiredInputResponse,
+    /// <summary>The token has already been verified.</summary>
+    AlreadySeenResponse,
+    /// <summary>The remote IP is missing.</summary>
+    MissingRemoteIp,
+    /// <summary>The remote IP is invalid.</summary>
+    InvalidRemoteIp,
+    /// <summary>The test credentials do not match.</summary>
+    NotUsingDummyPasscode,
+    /// <summary>The site key does not belong to the supplied secret.</summary>
+    SiteKeySecretMismatch
 }

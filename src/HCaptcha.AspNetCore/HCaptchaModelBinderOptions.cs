@@ -1,4 +1,4 @@
-// Copyright © Benjamin Abt 2020-2024, all rights reserved
+// Copyright © BEN ABT (https://benjamin-abt.com) - all rights reserved
 
 using Microsoft.AspNetCore.Mvc;
 
